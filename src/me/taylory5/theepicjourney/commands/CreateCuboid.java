@@ -3,7 +3,6 @@ package me.taylory5.theepicjourney.commands;
 import me.taylory5.theepicjourney.Journey;
 import me.taylory5.theepicjourney.Main;
 import me.taylory5.theepicjourney.Strings;
-import me.taylory5.theepicjourney.config.Config;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -29,11 +28,9 @@ public class CreateCuboid implements CommandExecutor{
 						player.sendMessage(Strings.ERROR + ChatColor.DARK_GRAY + "You must make a selection first");
 					}else{
 						if(args[0].equals("0")){
-							Journey.createRegion(Config.mainConfig, Integer.parseInt(args[0]), weSelection);
-							player.sendMessage(ChatColor.DARK_GRAY + "Set the area for the " + ChatColor.GOLD + "hub");
+							Journey.createRegion(0, player);
 						}else{
-							Journey.createRegion(Config.challengesConfig, Integer.parseInt(args[0]), weSelection);
-							player.sendMessage(ChatColor.DARK_GRAY + "Set the area for " + ChatColor.GOLD + "challenge " + args[0]);
+							Journey.createRegion(Integer.parseInt(args[0]), player);
 						}
 					}
 				}else{

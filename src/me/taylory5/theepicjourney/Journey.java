@@ -1,19 +1,21 @@
 package me.taylory5.theepicjourney;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import me.taylory5.theepicjourney.challenges.Challenges;
 import me.taylory5.theepicjourney.config.Config;
-import me.taylory5.theepicjourney.config.MyConfig;
 import me.taylory5.theepicjourney.runnables.Countdown;
 import me.taylory5.theepicjourney.scoreboards.ScoreboardForLobby;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldedit.bukkit.selections.Selection;
+import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class Journey {
 
@@ -189,16 +191,26 @@ public class Journey {
 		return ArrayLists.journeyPlayersNames;
 	}
 
-	public static void createRegion(MyConfig configName, int parseInt, Selection weSelection) {
+	public static void createRegion(int number, Player player) {
 		/*
-		 * Creates a new region by adding it to the config "ChallengesConfig.yml"
+		 * Creates a new region/cuboid for The Epic Journey
 		 */
-		if(configName.equals(Config.mainConfig)){
-			configName.set("Hub.Location", weSelection.getRegionSelector());
-			configName.saveConfig();
+		if(number == 0){
+			ProtectedCuboidRegion region = new ProtectedCuboidRegion("0-Hub", new BlockVector(Main.getWorldEdit().getSelection(player).getNativeMinimumPoint()), new BlockVector(Main.getWorldEdit().getSelection(player).getNativeMaximumPoint()));
+			Main.getWorldGuard().getRegionManager(player.getWorld()).addRegion(region);
+			Main.getWorldEdit().getSelection(player).getMaximumPoint().getBlock().setType(Material.NETHER_FENCE);
+			Main.getWorldEdit().getSelection(player).getMinimumPoint().getBlock().setType(Material.NETHER_FENCE);
+			player.sendMessage(ChatColor.DARK_GRAY + "Created the region " + ChatColor.GOLD + region.toString());
 		}else{
-			configName.set("Challenge." + parseInt + ".Location", weSelection.getRegionSelector());
-			configName.saveConfig();
+			if(number <= Challenges.totalChallenges){
+				ProtectedCuboidRegion region = new ProtectedCuboidRegion(number + "-" + Challenges.getName(number), new BlockVector(Main.getWorldEdit().getSelection(player).getNativeMinimumPoint()), new BlockVector(Main.getWorldEdit().getSelection(player).getNativeMaximumPoint()));
+				Main.getWorldGuard().getRegionManager(player.getWorld()).addRegion(region);
+				Main.getWorldEdit().getSelection(player).getMaximumPoint().getBlock().setType(Material.NETHER_FENCE);
+				Main.getWorldEdit().getSelection(player).getMinimumPoint().getBlock().setType(Material.NETHER_FENCE);
+				player.sendMessage(ChatColor.DARK_GRAY + "Created the region " + ChatColor.GOLD + region.toString());
+			}else{
+				player.sendMessage(Strings.ERROR + ChatColor.DARK_GRAY + "You cannot make a region for a non-existent challenge!");
+			}
 		}
 		
 	}
@@ -208,17 +220,15 @@ public class Journey {
 		 * Gets the region for the specified player, returns 404 if the region could not be found
 		 */
 		for(int i = 0; i <= Challenges.totalChallenges; i++){
+			ProtectedRegion region;
 			if(i == 0){
-				bob[i] = (Selection) Config.mainConfig.get("Hub.Location");
+				region = Main.getWorldGuard().getRegionManager(player.getWorld()).getRegion("0-Hub");
 			}else{
-				bob[i] = (Selection) Config.challengesConfig.get("Challenge." + i + ".Location");
+				region = Main.getWorldGuard().getRegionManager(player.getWorld()).getRegion(i + "-" + Challenges.getName(i));
 			}
-		}
-		for(int a = 0; a <= Challenges.totalChallenges; a++){
-			for(Selection diffRegions : bob){
-				if(diffRegions.contains(player.getLocation())){
-					return a;
-				}
+			
+			if(region.contains(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ())){
+				return i;
 			}
 		}
 		return 404;

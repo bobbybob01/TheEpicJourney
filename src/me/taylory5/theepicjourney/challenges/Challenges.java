@@ -9,8 +9,7 @@ public class Challenges {
 	public static final int totalChallenges = 1;
 	static int challengeNumber;
 	static Random random;
-	public static String[] xyzWorld = {"X1", "Y1", "Z1", "World1", "X2", "Y2", "Z2", "World2", "VillagerX", "VillagerY", "VillagerZ"};
-	public static String[] regionStuff = {"X1", "Y1", "Z1", "World1", "X2", "Y2", "Z2", "World2"};
+	public static String[] needConfigStuff = {"VillagerWorld", "VillagerX", "VillagerY", "VillagerZ"};
 	
 	private static HashMap<Integer, String> numAndNames = new HashMap<Integer, String>();
 	

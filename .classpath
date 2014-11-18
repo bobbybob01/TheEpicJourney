@@ -13,5 +13,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/tayloryoung/Downloads/worldedit-5-2/WorldEdit.jar"/>
+	<classpathentry kind="lib" path="/Users/tayloryoung/Desktop/WorldGuard.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

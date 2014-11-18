@@ -50,7 +50,7 @@ public class PlayerJoin implements Listener{
 		if(player.isOp()){	//Loops through all challenges and then if one of them is not setup correctly it adds to to an arraylist with the errors, then prints it out when they player logs in
 			HashMap<Integer, String> temp = new HashMap<Integer, String>();
 			for(int i = 1; i <= Challenges.totalChallenges; i++){
-				for(String xyzWorld : Challenges.xyzWorld){//Change this if its the world thing, us if to check type (Double or World)
+				for(String xyzWorld : Challenges.needConfigStuff){//Change this if its the world thing, us if to check type (Double or World)
 					if(Config.challengesConfig.get("Challenge." + i + ".Location." + xyzWorld).equals("not set")){
 						if(temp.isEmpty()){
 							temp.put(i, xyzWorld);

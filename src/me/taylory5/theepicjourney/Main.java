@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Main extends JavaPlugin{
 
@@ -55,8 +56,23 @@ public class Main extends JavaPlugin{
 	
 	public static WorldEditPlugin getWorldEdit() {
         Plugin pluginWE = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-        if (pluginWE instanceof WorldEditPlugin) return (WorldEditPlugin) pluginWE;
-        else return null;
+        if (pluginWE instanceof WorldEditPlugin) {
+        	return (WorldEditPlugin) pluginWE;
+        }
+        else {
+        	return null;
+        }
 	}
+	
+	public static WorldGuardPlugin getWorldGuard() {
+        Plugin pluginWG = Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
+     
+        // WorldGuard may not be loaded
+        if (pluginWG == null || !(pluginWG instanceof WorldGuardPlugin)) {
+            return null; // Maybe you want throw an exception instead
+        }
+     
+        return (WorldGuardPlugin) pluginWG;
+    }
 	
 }

@@ -3,6 +3,8 @@ package me.taylory5.theepicjourney.playerevents.inventorymenu;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.text.PlainView;
+
 import me.taylory5.theepicjourney.Hub;
 import me.taylory5.theepicjourney.Journey;
 import me.taylory5.theepicjourney.Strings;
@@ -130,6 +132,16 @@ public class Inventory implements Listener{
 				ParticleEffect.sendParticleToAll(Particles.getParticle(event.getPlayer()), playerLocation, 1F, 1F, 1F, 1F, 1);
 				
 				player.sendMessage("Your region: " + Journey.getRegion(player));
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerBreak(PlayerInteractEvent event){
+		Player player = event.getPlayer();
+		if(event.getAction().name().contains("LEFT")){
+			if(Journey.getRegion(player) == 0){
+				event.setCancelled(true);
 			}
 		}
 	}
