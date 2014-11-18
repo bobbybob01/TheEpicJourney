@@ -10,4 +10,5 @@ commands:
   description: Toggles Admin/Player mode
   permission: epicjourney.adminmode
  createcuboid:
-  description: Creates a cuboid
+  description: Creates a cuboid for the hub/challenge specified with the first arguments
+  theepicjourney.createcuboid

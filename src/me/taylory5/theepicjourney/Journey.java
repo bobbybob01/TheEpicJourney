@@ -204,6 +204,9 @@ public class Journey {
 	}
 	
 	public static int getRegion(Player player){
+		/*
+		 * Gets the region for the specified player, returns 404 if the region could not be found
+		 */
 		for(int i = 0; i <= Challenges.totalChallenges; i++){
 			if(i == 0){
 				bob[i] = (Selection) Config.mainConfig.get("Hub.Location");
