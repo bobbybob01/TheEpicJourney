@@ -1,0 +1,13 @@
+name: TheEpicJourney
+main: me.taylory5.theepicjourney.Main
+author: taylory5
+version: 1.0
+commands: 
+ sethubspawn:
+  description: Sets the spawn location for the hub
+  permission: epicjourney.sethubspawn
+ admin:
+  description: Toggles Admin/Player mode
+  permission: epicjourney.adminmode
+ createcuboid:
+  description: Creates a cuboid
