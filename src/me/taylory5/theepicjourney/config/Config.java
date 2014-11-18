@@ -46,6 +46,10 @@ public class Config {
 				challengesConfig.set("Challenge." + a + ".Location.X2", "not set");
 				challengesConfig.set("Challenge." + a + ".Location.Y2", "not set");
 				challengesConfig.set("Challenge." + a + ".Location.Z2", "not set");
+				
+				challengesConfig.set("Challenge." + a + ".Location.VillagerX", "not set");
+				challengesConfig.set("Challenge." + a + ".Location.VillagerY", "not set");
+				challengesConfig.set("Challenge." + a + ".Location.VillagerZ", "not set");
 				}
 			}
 		challengesConfig.saveConfig();

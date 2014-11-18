@@ -11,4 +11,4 @@ commands:
   permission: epicjourney.adminmode
  createcuboid:
   description: Creates a cuboid for the hub/challenge specified with the first arguments
-  theepicjourney.createcuboid
+  permission: theepicjourney.createcuboid
